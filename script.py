@@ -57,10 +57,10 @@ with open('input.txt', 'r') as fp:
             current_selection = None
             if old_token == '*':
                 line_number, section_number = get_section(old_token_count, section_number) 
-                output.append('%s %s' % (line_number, updated_old_line))
+                print('%s %s' % (line_number, updated_old_line))
             elif old_token == '.':
                 spaces = ' ' * old_token_count
-                output.append('%s %s %s' % (spaces, collapse, updated_old_line))
+                print('%s %s %s' % (spaces, collapse, updated_old_line))
         else:
             if old_token == '.':
                 if not current_selection or old_token_count < new_token_count:
@@ -70,21 +70,17 @@ with open('input.txt', 'r') as fp:
                     current_selection = collapse
 
                 spaces = ' ' * old_token_count
-                output.append('%s %s %s' % (spaces, current_selection, updated_old_line))
+                print('%s %s %s' % (spaces, current_selection, updated_old_line))
             elif old_token == '*':
                 line_number, section_number = get_section(old_token_count, section_number)
-                output.append('%s %s' % (line_number, updated_old_line))
+                print('%s %s' % (line_number, updated_old_line))
 
         if multi_lines and new_token:
             for multi_line in multi_lines:
-                output.append('%s   %s' % (spaces, multi_line))
+                print('%s   %s' % (spaces, multi_line))
             multi_lines = []
 
         old_line = line
 
     spaces = ' ' * new_token_count
-    output.append('%s %s %s' % (spaces, collapse, updated_new_line))
-
-with open('output.txt' , 'w') as fp:
-    for line in output:
-        fp.write('%s\n' % line)
+    print('%s %s %s' % (spaces, collapse, updated_new_line))
